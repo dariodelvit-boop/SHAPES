@@ -21,36 +21,41 @@
             color: #333;
         }
 
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(rgba(10, 48, 34, 0.8), rgba(10, 48, 34, 0.8)), 
-                        url('YOUR_MAIN_HERO_IMAGE.jpg'); 
-            background-size: cover;
-            background-position: center;
-            padding: 100px 20px;
-            text-align: center;
-            color: white;
+        /* --- CAROUSEL HEADER --- */
+        .hero-carousel {
             position: relative;
+            height: 450px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .team-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            border: 1px solid var(--mid-gold);
-            backdrop-filter: blur(5px);
+        .carousel-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .carousel-slide.active { opacity: 1; }
+
+        .hero-overlay {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            width: 100%;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
             font-size: 54px;
-            margin: 0 0 15px 0;
+            margin: 0;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -58,11 +63,12 @@
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
 
-        .hero p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.9;
+        .hero-subtext {
+            color: white;
+            font-size: 14px;
+            letter-spacing: 5px;
+            margin-top: 10px;
+            font-weight: 400;
         }
 
         /* SEARCH TOOLBAR */
@@ -85,11 +91,7 @@
         }
 
         .search-wrapper {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            padding: 10px 25px;
-            gap: 15px;
+            flex: 1; display: flex; align-items: center; padding: 10px 25px; gap: 15px;
         }
 
         .search-wrapper input {
@@ -120,83 +122,77 @@
             position: relative;
         }
 
-        .album-card:hover {
-            transform: translateY(-8px);
-            border-color: #ffe16b;
-        }
+        .album-card:hover { transform: translateY(-8px); border-color: #ffe16b; }
 
-        /* PHOTO OWNER WATERMARK */
         .watermark {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            font-size: 10px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            z-index: 2;
-            pointer-events: none;
-            text-transform: uppercase;
-            font-weight: 700;
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(0,0,0,0.5); color: white;
+            font-size: 10px; padding: 4px 8px; border-radius: 4px;
+            z-index: 2; pointer-events: none; text-transform: uppercase; font-weight: 700;
         }
 
         .album-img {
-            width: 100%;
-            height: 240px;
-            background-size: 115%;
-            background-position: center;
-            background-repeat: no-repeat;
+            width: 100%; height: 240px;
+            background-size: 115%; background-position: center; background-repeat: no-repeat;
             transition: background-size 0.6s ease;
         }
 
-        .album-card:hover .album-img {
-            background-size: 125%;
-        }
+        .album-card:hover .album-img { background-size: 125%; }
 
         .album-info { padding: 25px; border-top: 1px solid #f0f0f0; }
         .album-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: 20px; margin: 0; color: var(--dark-green); }
         .album-meta { font-size: 13px; color: var(--primary-green); font-weight: 700; text-transform: uppercase; margin-top: 5px; }
 
-        /* FOOTER */
+        /* SLIMMER GRADIENT FOOTER */
         footer {
             text-align: center;
-            padding: 60px 20px;
+            padding: 30px 20px;
             background: radial-gradient(circle at top, var(--primary-green) 0%, #04140e 100%);
             color: white;
             border-top: 5px solid var(--mid-gold);
         }
 
-        .footer-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 30px; }
+        .footer-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; }
 
         .insta-btn, .analytics-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 22px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: 0.3s;
-            font-size: 12px;
-            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 20px; text-decoration: none; border-radius: 50px;
+            font-weight: 700; transition: 0.3s; font-size: 11px; text-transform: uppercase;
         }
 
         .insta-btn { border: 2px solid var(--mid-gold); color: var(--mid-gold); }
         .insta-btn:hover { background: var(--gold-gradient); color: var(--dark-green); }
 
         .analytics-btn { border: 2px solid #ffffff; color: #ffffff; opacity: 0.8; }
-        .analytics-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); color: var(--bright-gold); }
+        .analytics-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); }
 
-        .disclaimer { font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; max-width: 400px; margin: 20px auto 0; }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="team-badge"><i class="fa-solid fa-camera-retro"></i> SHAPE Multimedia Gallery</div>
-        <h1>Photo Library</h1>
-    </section>
+    <header class="hero-carousel">
+        <div class="carousel-slide active" style="background-image: url('carrusel/1.jpg');background-position: 50% 40%"></div>
+        <div class="carousel-slide" style="background-image: url('carrusel/2.jpg');background-position: 50% 30%"></div>
+        <div class="carousel-slide" style="background-image: url('carrusel/3.jpg');background-position: 50% 30%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/4.jpg')"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/5.jpg')"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/6.jpg')"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/7.jpg');background-position: 50% 10%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/8.jpg');background-position: 50% 48%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/9.jpg')"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/10.jpg');background-position: 50% 18%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/11.jpg')"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/12.jpg');background-position: 50% 20%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/13.jpg');background-position: 50% 30%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/14.jpg');background-position: 50% 30%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/15.jpg');background-position: 50% 10%"></div>
+		<div class="carousel-slide" style="background-image: url('carrusel/16.jpg');background-position: 50% 30%"></div>
+        
+        <div class="hero-overlay">
+            <h1>Photo Library</h1>
+            <p class="hero-subtext">SHAPE SPARTAN MULTIMEDIA</p>
+        </div>
+    </header>
 
     <div class="toolbar-container">
         <div class="toolbar">
@@ -263,36 +259,39 @@
                 <div class="album-img" style="background-image: url('photos/Euros.jpg');background-position: 57% 48%"></div>
                 <div class="album-info"><p class="album-title">Euros</p><p class="album-meta">22-23 · 05 · 25</p></div>
             </div>
-			
-		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329517461/" class="album-link" data-category="football">
+        </a>
+            
+        <a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329517461/" class="album-link" data-category="football">
             <div class="album-card">
                 <div class="watermark">© DELVIT</div>
                 <div class="album-img" style="background-image: url('photos/Workout.jpg');background-position: top"></div>
                 <div class="album-info"><p class="album-title">Work Out</p><p class="album-meta">03 · 09 · 25</p></div>
             </div>
-			
-		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329517461/" class="album-link" data-category="football">
+        </a>
+            
+        <a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329517461/" class="album-link" data-category="football">
             <div class="album-card">
                 <div class="watermark">© DELVIT</div>
                 <div class="album-img" style="background-image: url('photos/SHAPE vs ISB.jpg');"></div>
                 <div class="album-info"><p class="album-title">SHAPE vs ISB</p><p class="album-meta">20 · 09 · 25</p></div>
             </div>
-			
-		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329518030/" class="album-link" data-category="football">
+        </a>
+            
+        <a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329518030/" class="album-link" data-category="football">
             <div class="album-card">
                 <div class="watermark">© DELVIT</div>
                 <div class="album-img" style="background-image: url('photos/SHAPE vs Aviano.jpg');background-position: top"></div>
                 <div class="album-info"><p class="album-title">SHAPE vs Aviano</p><p class="album-meta">26 · 09 · 25</p></div>
             </div>
-			
-		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720330191436/" class="album-link" data-category="football">
+        </a>
+            
+        <a href="https://www.flickr.com/photos/202048684@N08/albums/72177720330191436/" class="album-link" data-category="football">
             <div class="album-card">
                 <div class="watermark">© DELVIT</div>
                 <div class="album-img" style="background-image: url('photos/Foto Day.jpg');background-position: top"></div>
                 <div class="album-info"><p class="album-title">Foto Day</p><p class="album-meta">05 · 11 · 25</p></div>
             </div>
         </a>
-		
 
     </div>
 
@@ -312,41 +311,39 @@
             </a>
 
             <a href="https://www.instagram.com/dario.delvit/" target="_blank" 
-               style="text-decoration: none; color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; margin-top: 5px; transition: 0.3s;"
+               style="text-decoration: none; color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; transition: 0.3s;"
                onmouseover="this.style.color='#ffe16b'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
                 <i class="fa-solid fa-camera" style="margin-right: 5px;"></i> Photos by @dario.delvit
             </a>
         </div>
-
-        <p style="font-family: 'Cinzel', serif; font-weight: 900; letter-spacing: 3px; color: var(--mid-gold); margin: 0;">WE ARE SPARTANS</p>
-        <div class="disclaimer">Developed by students for the athlete community.</div>
     </footer>
-	
-	<script>
-    function filterAlbums() {
-        // 1. Get what the user typed
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        
-        // 2. Get all the album bubbles
-        let albums = document.getElementsByClassName('album-link');
+    
+    <script>
+        // CAROUSEL LOGIC
+        let slides = document.querySelectorAll('.carousel-slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 3000);
 
-        for (let i = 0; i < albums.length; i++) {
-            // 3. Get the text from Title and Meta
-            let title = albums[i].querySelector('.album-title').innerText.toLowerCase();
-            let meta = albums[i].querySelector('.album-meta').innerText.toLowerCase();
-            
-            // 4. Get the text from your new data-category attribute
-            // (If the attribute is missing, it just uses an empty string "")
-            let categories = albums[i].getAttribute('data-category') ? albums[i].getAttribute('data-category').toLowerCase() : "";
-            
-            // 5. Check if the search matches ANY of those three things
-            if (title.includes(input) || meta.includes(input) || categories.includes(input)) {
-                albums[i].style.display = ""; // Show it
-            } else {
-                albums[i].style.display = "none"; // Hide it
+        // SEARCH LOGIC
+        function filterAlbums() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let albums = document.getElementsByClassName('album-link');
+            for (let i = 0; i < albums.length; i++) {
+                let title = albums[i].querySelector('.album-title').innerText.toLowerCase();
+                let meta = albums[i].querySelector('.album-meta').innerText.toLowerCase();
+                let categories = albums[i].getAttribute('data-category') || "";
+                if (title.includes(input) || meta.includes(input) || categories.toLowerCase().includes(input)) {
+                    albums[i].style.display = "";
+                } else {
+                    albums[i].style.display = "none";
+                }
             }
         }
-    }
-	</script>
+    </script>
 </body>
 </html>
