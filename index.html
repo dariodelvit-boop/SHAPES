@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SHAPE | Multimedia Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: rgb(35, 115, 84);
+            --dark-green: #0a3022;
+            --mid-gold: rgb(242, 194, 12);
+            --gold-gradient: linear-gradient(135deg, #ffe16b 0%, var(--mid-gold) 50%, #b08d0a 100%);
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0; padding: 0;
+            color: #333;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(rgba(10, 48, 34, 0.8), rgba(10, 48, 34, 0.8)), 
+                        url('YOUR_MAIN_HERO_IMAGE.jpg'); 
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .team-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border: 1px solid var(--mid-gold);
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 54px;
+            margin: 0 0 15px 0;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* SEARCH TOOLBAR */
+        .toolbar-container {
+            max-width: 900px;
+            margin: -35px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .toolbar {
+            background: var(--glass-white);
+            padding: 12px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 2px solid var(--mid-gold);
+        }
+
+        .search-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 10px 25px;
+            gap: 15px;
+        }
+
+        .search-wrapper input {
+            border: none; background: transparent; width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px; outline: none;
+        }
+
+        /* GRID */
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .album-link { text-decoration: none; color: inherit; transition: opacity 0.3s ease; }
+
+        .album-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 2px solid var(--mid-gold);
+            position: relative;
+        }
+
+        .album-card:hover {
+            transform: translateY(-8px);
+            border-color: #ffe16b;
+        }
+
+        /* PHOTO OWNER WATERMARK */
+        .watermark {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 2;
+            pointer-events: none;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .album-img {
+            width: 100%;
+            height: 240px;
+            background-size: 115%;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-size 0.6s ease;
+        }
+
+        .album-card:hover .album-img {
+            background-size: 125%;
+        }
+
+        .album-info { padding: 25px; border-top: 1px solid #f0f0f0; }
+        .album-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: 20px; margin: 0; color: var(--dark-green); }
+        .album-meta { font-size: 13px; color: var(--primary-green); font-weight: 700; text-transform: uppercase; margin-top: 5px; }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at top, var(--primary-green) 0%, #04140e 100%);
+            color: white;
+            border-top: 5px solid var(--mid-gold);
+        }
+
+        .footer-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 30px; }
+
+        .insta-btn, .analytics-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: 0.3s;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .insta-btn { border: 2px solid var(--mid-gold); color: var(--mid-gold); }
+        .insta-btn:hover { background: var(--gold-gradient); color: var(--dark-green); }
+
+        .analytics-btn { border: 2px solid #ffffff; color: #ffffff; opacity: 0.8; }
+        .analytics-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); color: var(--bright-gold); }
+
+        .disclaimer { font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; max-width: 400px; margin: 20px auto 0; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="team-badge"><i class="fa-solid fa-camera-retro"></i> SHAPE Multimedia Gallery</div>
+        <h1>Photo Library</h1>
+    </section>
+
+    <div class="toolbar-container">
+        <div class="toolbar">
+            <div class="search-wrapper">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--primary-green)"></i>
+                <input type="text" id="searchInput" placeholder="Search by sport or event..." onkeyup="filterAlbums()">
+            </div>
+        </div>
+    </div>
+
+    <div class="gallery-grid" id="albumGrid">
+        
+        <a href="https://drive.google.com/drive/folders/106g4ojeR_baoLboYXZo4bnV9JDrqbT_3" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Ktown.jpg')"></div>
+                <div class="album-info"><p class="album-title">K-town</p><p class="album-meta">14 · 03 · 25</p></div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/16QnmngrR3gbHrDxhbWyve5gaFkW8sPLt" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Lakenheath.jpg');background-position: 50% 40%"></div>
+                <div class="album-info"><p class="album-title">Lakenheath</p><p class="album-meta">22 · 03 · 25</p></div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1p4tx3BMj6xp2zR9dYE-DaFm-7ZXhAiri" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Brussels.jpg');background-position: 50% 40%"></div>
+                <div class="album-info"><p class="album-title">Brussels</p><p class="album-meta">12 · 04 · 25</p></div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1yDiI-V48ItCidq-X40MSwtGipS30r8qO" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Ansbach.jpg');background-position: 50% 20%"></div>
+                <div class="album-info"><p class="album-title">Ansbach</p><p class="album-meta">19 · 04 · 25</p></div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1LjqSgGd7GHkKUX39PAaxUUiIDuav3H9B" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Ansbach II.jpg');background-position: 50% 20%"></div>
+                <div class="album-info"><p class="album-title">Ansbach II</p><p class="album-meta">26 · 04 · 25</p></div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/1gFAsO3bNQ-E8f2bINUoa-_XFOt7vF_wI" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Brussels II.jpg');background-position: 50% 60%"></div>
+                <div class="album-info"><p class="album-title">Brussels II</p><p class="album-meta">10 · 05 · 25</p></div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/drive/folders/11opAftPvc5Anaan52lD38YKGgxWVX2gT" class="album-link" data-category="track">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Euros.jpg');background-position: 57% 48%"></div>
+                <div class="album-info"><p class="album-title">Euros</p><p class="album-meta">22-23 · 05 · 25</p></div>
+            </div>
+			
+		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329517461/" class="album-link" data-category="football">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Workout.jpg');background-position: top"></div>
+                <div class="album-info"><p class="album-title">Work Out</p><p class="album-meta">03 · 09 · 25</p></div>
+            </div>
+			
+		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329517461/" class="album-link" data-category="football">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/SHAPE vs ISB.jpg');"></div>
+                <div class="album-info"><p class="album-title">SHAPE vs ISB</p><p class="album-meta">20 · 09 · 25</p></div>
+            </div>
+			
+		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720329518030/" class="album-link" data-category="football">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/SHAPE vs Aviano.jpg');background-position: top"></div>
+                <div class="album-info"><p class="album-title">SHAPE vs Aviano</p><p class="album-meta">26 · 09 · 25</p></div>
+            </div>
+			
+		<a href="https://www.flickr.com/photos/202048684@N08/albums/72177720330191436/" class="album-link" data-category="football">
+            <div class="album-card">
+                <div class="watermark">© DELVIT</div>
+                <div class="album-img" style="background-image: url('photos/Foto Day.jpg');background-position: top"></div>
+                <div class="album-info"><p class="album-title">Foto Day</p><p class="album-meta">05 · 11 · 25</p></div>
+            </div>
+        </a>
+		
+
+    </div>
+
+    <footer>
+        <div class="footer-buttons">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <a href="https://www.instagram.com/shape.track_field/" target="_blank" class="insta-btn">
+                    <i class="fa-brands fa-instagram"></i> Track & Field
+                </a>
+                <a href="https://www.instagram.com/shape.football/" target="_blank" class="insta-btn">
+                    <i class="fa-brands fa-instagram"></i> Football
+                </a>
+            </div>
+
+            <a href="performance-analytics.html" class="analytics-btn">
+                <i class="fa-solid fa-chart-line"></i> Performance Analytics
+            </a>
+
+            <a href="https://www.instagram.com/dario.delvit/" target="_blank" 
+               style="text-decoration: none; color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 600; margin-top: 5px; transition: 0.3s;"
+               onmouseover="this.style.color='#ffe16b'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+                <i class="fa-solid fa-camera" style="margin-right: 5px;"></i> Photos by @dario.delvit
+            </a>
+        </div>
+
+        <p style="font-family: 'Cinzel', serif; font-weight: 900; letter-spacing: 3px; color: var(--mid-gold); margin: 0;">WE ARE SPARTANS</p>
+        <div class="disclaimer">Developed by students for the athlete community.</div>
+    </footer>
+	
+	<script>
+    function filterAlbums() {
+        // 1. Get what the user typed
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        
+        // 2. Get all the album bubbles
+        let albums = document.getElementsByClassName('album-link');
+
+        for (let i = 0; i < albums.length; i++) {
+            // 3. Get the text from Title and Meta
+            let title = albums[i].querySelector('.album-title').innerText.toLowerCase();
+            let meta = albums[i].querySelector('.album-meta').innerText.toLowerCase();
+            
+            // 4. Get the text from your new data-category attribute
+            // (If the attribute is missing, it just uses an empty string "")
+            let categories = albums[i].getAttribute('data-category') ? albums[i].getAttribute('data-category').toLowerCase() : "";
+            
+            // 5. Check if the search matches ANY of those three things
+            if (title.includes(input) || meta.includes(input) || categories.includes(input)) {
+                albums[i].style.display = ""; // Show it
+            } else {
+                albums[i].style.display = "none"; // Hide it
+            }
+        }
+    }
+	</script>
+</body>
+</html>
